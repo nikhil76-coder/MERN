@@ -11,10 +11,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # You can use other OS like macos-latest or windows-latest
-    
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Update to v3 for Node16 support
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -33,6 +33,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages    # The branch to deploy the app to (gh-pages is commonly used for GitHub Pages)
-          folder: build       # The folder containing the production build of your React app
+          branch: gh-pages        # Deploy to the gh-pages branch
+          folder: build           # The folder containing the production build of your React app
           token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
