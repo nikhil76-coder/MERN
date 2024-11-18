@@ -1,0 +1,38 @@
+name: React App CI
+
+on:
+  push:
+    branches:
+      - main   # Run the workflow when there is a push to the main branch
+  pull_request:
+    branches:
+      - main   # Run the workflow when a PR is opened against the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can use other OS like macos-latest or windows-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Specify the Node.js version you are using
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test -- --coverage  # You can replace this with any testing command like Jest
+
+      - name: Build the app
+        run: npm run build  # Builds the production-ready app
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages    # The branch to deploy the app to (gh-pages is commonly used for GitHub Pages)
+          folder: build       # The folder containing the production build of your React app
+          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
