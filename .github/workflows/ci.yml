@@ -12,9 +12,13 @@ jobs:
   build:
     runs-on: ubuntu-latest  # You can use other OS like macos-latest or windows-latest
 
+    permissions:
+      contents: write  # Grant write permission to repository contents (needed to push to gh-pages)
+      pull-requests: write  # Optional, if you need to interact with PRs
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3  # Update to v3 for Node16 support
+        uses: actions/checkout@v3  # Use v3 to ensure compatibility with Node 16
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
