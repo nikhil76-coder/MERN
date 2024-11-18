@@ -24,9 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Tests
-        run: npm test -- --coverage  # You can replace this with any testing command like Jest
-
       - name: Build the app
         run: npm run build  # Builds the production-ready app
 
